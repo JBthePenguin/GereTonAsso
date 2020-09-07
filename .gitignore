@@ -6,6 +6,8 @@ myasso/__pycache__/
 
 myasso/settings/__pycache__/
 
-visitapp/__pycache__/
+*app/__pycache__/
 
-visitapp/migrations/__pycache__/
+*app/migrations/__pycache__/
+
+*app/migrations/0*.py

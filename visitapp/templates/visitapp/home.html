@@ -1,27 +1,6 @@
-{% load static %}
+{% extends 'visitapp/base.html' %}
 
-<!DOCTYPE html>
-
-<html lang="fr">
-
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <meta name="description" content="Gère ton Asso">
-        <meta name="author" content="JBthePenguin">
-        <!-- Favicon -->
-        <link rel='shortcut icon' type='image/x-icon' href="{% static 'visitapp/img/favicon.ico' %}">
-        <!-- Title -->
-        <title>{{ title_site }} | {{ page_title }}</title>
-        <!-- CSS -->
-        <link href="{% static 'visitapp/css/custom_styles.css' %}" rel="stylesheet">
-    </head>
-
-    <body>
-        <!-- MAIN -->
-        <div>
-            <p>Accueil</p>
-        </div>
-    </body>
-
-</html>
+<!-- Main -->
+{% block main %}
+<p>Accueil</p>
+{% endblock %}
