@@ -1,0 +1,11 @@
+env/
+
+db.sqlite3
+
+myasso/__pycache__/
+
+myasso/settings/__pycache__/
+
+visitapp/__pycache__/
+
+visitapp/migrations/__pycache__/
