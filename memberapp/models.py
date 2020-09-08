@@ -1,5 +1,6 @@
 from django.db import models
 from phonenumber_field.modelfields import PhoneNumberField
+from jsignature.fields import JSignatureField
 
 
 class Member(models.Model):
@@ -23,6 +24,7 @@ class Member(models.Model):
         max_length=1, choices=GRADE_CHOICES,
         default="A", verbose_name="Statut"
     )
+    signature = JSignatureField(verbose_name="Signature")
 
     class Meta:
         ordering = ['last_name', 'first_name']

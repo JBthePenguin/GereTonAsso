@@ -39,7 +39,8 @@ INSTALLED_APPS = [
     'debug_toolbar',
     'phonenumber_field',
     'visitapp',
-    'memberapp'
+    'memberapp',
+    'jsignature',
 ]
 
 MIDDLEWARE = [
@@ -126,3 +127,7 @@ STATIC_URL = '/static/'
 # Phone number
 PHONENUMBER_DB_FORMAT = 'NATIONAL'
 PHONENUMBER_DEFAULT_REGION = 'FR'
+
+# Signature
+JSIGNATURE_JQUERY = 'admin'
+JSIGNATURE_LINE_WIDTH = -1
