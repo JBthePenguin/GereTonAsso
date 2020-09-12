@@ -3,6 +3,10 @@
 <!-- Main -->
 {% block main %}
 <h2>Membres</h2>
+<form method='GET'>
+  <input type='text' name='search' value='{{ request.GET.search }}'>
+  <button type='submit'>Rechercher</button>
+</form>
 <table>
   <thead>
     <tr>

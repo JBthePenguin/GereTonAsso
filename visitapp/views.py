@@ -30,3 +30,13 @@ class MemberListView(ListView):
         context['page_title'] = 'Membres'
         context.update(DEFAULT_CONTEXT)
         return context
+
+    def get_queryset(self):
+        search = self.request.GET.get('search')
+        if search:
+            object_list = self.model.objects.filter(
+                last_name__icontains=search) | self.model.objects.filter(
+                    first_name__icontains=search)
+        else:
+            object_list = self.model.objects.all()
+        return object_list
