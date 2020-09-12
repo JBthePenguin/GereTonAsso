@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'phonenumber_field',
     'visitapp',
     'memberapp',
+    'inventoryapp',
     'jsignature',
 ]
 
@@ -131,3 +132,8 @@ PHONENUMBER_DEFAULT_REGION = 'FR'
 # Signature
 JSIGNATURE_JQUERY = 'admin'
 JSIGNATURE_LINE_WIDTH = -1
+
+# Debug Toolbar
+DEBUG_TOOLBAR_CONFIG = {
+    "SHOW_TOOLBAR_CALLBACK" : lambda request: True,
+}
