@@ -7,3 +7,5 @@ django-phonenumber-field
 phonenumbers
 
 django-jsignature
+
+django-filter

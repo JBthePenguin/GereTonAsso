@@ -27,7 +27,7 @@ class Member(models.Model):
     signature = JSignatureField(verbose_name="Signature")
 
     class Meta:
-        ordering = ['-active', 'last_name', 'first_name']
+        ordering = ['last_name', 'first_name']
         verbose_name = "Membre"
         verbose_name_plural = "Membres"
 

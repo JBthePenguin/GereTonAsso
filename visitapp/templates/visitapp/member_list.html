@@ -3,10 +3,13 @@
 <!-- Main -->
 {% block main %}
 <h2>Membres</h2>
-<form method='GET'>
-  <input type='text' name='search' value='{{ request.GET.search }}'>
+<!-- Search form -->
+<button onclick="DisplayForm()">Afficher / Masquer la recherche avancée</button>
+<form id="FilterForm" action="" method="get" style="display: none;">
+  {{ filter.form.as_p }}
   <button type='submit'>Rechercher</button>
 </form>
+<hr>
 <table>
   <thead>
     <tr>
@@ -21,12 +24,12 @@
 	  </tr>
 	</thead>
 	<tbody>
-    {% for member in object_list %}
+    {% for member in filter.qs %}
     <tr>
 		  <td>{{ member.last_name }}</td>
 		  <td>{{ member.first_name }}</td>
       <td>{{ member.email }}</td>
-      <td>{{ member.phone }}</td>
+      <td>{{ member.phone.as_national }}</td>
       <td>{{ member.date_of_birth }}</td>
       <td>{{ member.date_joined|date:'j F Y' }}</td>
       <td>{% if member.grade == 'A' %}Adhérent{% elif member.grade == 'C' %}Collège{% else %}Honneur{% endif %}</td>

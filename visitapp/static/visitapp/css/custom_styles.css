@@ -1,9 +1,11 @@
-/*
-Generic Styling, for Desktops/Laptops
-*/
+h2 {
+  margin-bottom: 2px;
+}
+
 table {
   width: 100%;
   border-collapse: collapse;
+  margin-top: 3px;
 }
 /* Zebra striping */
 tr:nth-of-type(odd) {
@@ -23,12 +25,16 @@ td, th {
   text-align: left;
 }
 
-input, button {
-  margin: 0px 5px 5px 0px;
-  padding: 3px;
+#FilterForm {
+  margin: 3px 5px 10px 0px;
+  padding: 0px 5px 5px 5px;
 }
 
-input {
+input, button {
+  padding: 5px;
+}
+
+input, select {
   border: 1px solid black;
 }
 
@@ -37,6 +43,7 @@ button {
   background-color: black;
   color: white;
   cursor: pointer;
+  margin-top: 5px;
 }
 /*
 Max width before this PARTICULAR table gets nasty
