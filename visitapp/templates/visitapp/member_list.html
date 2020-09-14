@@ -5,9 +5,15 @@
 <h2>Membres</h2>
 <!-- Search form -->
 <button onclick="DisplayForm()">Afficher / Masquer la recherche avancée</button>
-<form id="FilterForm" action="" method="get" style="display: none;">
-  {{ filter.form.as_p }}
-  <button type='submit'>Rechercher</button>
+<form id="FilterForm" action="" method="get" style="display: {{ display_form }};">
+  <ul>
+  {% for field in filter.form %}
+    {{ field.errors }}
+    <li>{{ field.label_tag }} {{ field }}</li>
+  {% endfor %}
+  </ul>
+  <button id="FilterButton" type='submit'>Rechercher</button>
+  <input type="submit" name="reset" value="Annuler" style="color: white; background-color: red;">
 </form>
 <hr>
 <table>
@@ -24,7 +30,7 @@
 	  </tr>
 	</thead>
 	<tbody>
-    {% for member in filter.qs %}
+    {% for member in object_list %}
     <tr>
 		  <td>{{ member.last_name }}</td>
 		  <td>{{ member.first_name }}</td>

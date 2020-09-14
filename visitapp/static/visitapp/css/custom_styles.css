@@ -26,12 +26,30 @@ td, th {
 }
 
 #FilterForm {
-  margin: 3px 5px 10px 0px;
-  padding: 0px 5px 5px 5px;
+  margin: 5px 5px 10px 0px;
+  padding: 0px;
+  background-color: #b7b1b1;
+  border: 1px solid black;
+}
+
+ul {
+  margin-top: 0px;
+  padding-left: 5px;
+}
+
+li {
+  list-style-type: none;
+  display : inline-block;
 }
 
 input, button {
   padding: 5px;
+  margin: 5px 5px 5px 0px;
+}
+
+#FilterButton {
+  margin-top: 0px;
+  margin-left: 5px;
 }
 
 input, select {
@@ -43,7 +61,6 @@ button {
   background-color: black;
   color: white;
   cursor: pointer;
-  margin-top: 5px;
 }
 /*
 Max width before this PARTICULAR table gets nasty
@@ -96,4 +113,7 @@ only screen and (max-width: 760px),
 	td:nth-of-type(3):before { content: "Email"; }
 	td:nth-of-type(4):before { content: "Téléphone"; }
 	td:nth-of-type(5):before { content: "Date naissance"; }
+  td:nth-of-type(6):before { content: "Date d'adhésion"; }
+	td:nth-of-type(7):before { content: "Statut"; }
+	td:nth-of-type(8):before { content: "Actif"; }
 }

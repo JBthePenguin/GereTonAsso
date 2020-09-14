@@ -43,6 +43,7 @@ class MyBooleanWidget(forms.Select):
 
 
 class MemberFilter(django_filters.FilterSet):
+    """Subclass of django_filters.FilterSet """
     last_name = django_filters.CharFilter(
         lookup_expr='icontains', label='Nom contenant')
     first_name = django_filters.CharFilter(
@@ -72,29 +73,24 @@ class MemberFilter(django_filters.FilterSet):
     grade = django_filters.ChoiceFilter(choices=GRADE_CHOICES, label='Statut')
 
     def filter_phone(self, queryset, name, value):
-        # disregarding spaces
-        s = []
+        s = []  # disregarding spaces
         for i in range(0, len(value)):
             s.append(value[i:i+1])
         return queryset.filter(phone__iregex='\\s*'.join(s))
 
     def filter_birth_gte(self, queryset, name, value):
-        # disregarding spaces
         return queryset.filter(date_of_birth__gte=value).order_by(
             'date_of_birth')
 
     def filter_birth_lte(self, queryset, name, value):
-        # disregarding spaces
         return queryset.filter(date_of_birth__lte=value).order_by(
             'date_of_birth')
 
     def filter_joined_gte(self, queryset, name, value):
-        # disregarding spaces
         return queryset.filter(date_joined__date__gte=value).order_by(
             'date_joined')
 
     def filter_joined_lte(self, queryset, name, value):
-        # disregarding spaces
         return queryset.filter(date_joined__date__lte=value).order_by(
             'date_joined')
 
