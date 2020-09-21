@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'visitapp',
     'memberapp',
     'inventoryapp',
+    'loanapp',
     'jsignature',
     'django_filters',
 ]

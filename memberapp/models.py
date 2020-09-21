@@ -10,18 +10,21 @@ class Member(models.Model):
         db_index=True, max_length=150, verbose_name="Nom")
     email = models.EmailField(
         db_index=True, max_length=150, unique=True, verbose_name="Email")
-    phone = PhoneNumberField(blank=True, verbose_name="Téléphone")
-    date_of_birth = models.DateField(verbose_name="Date de naissance")
+    phone = PhoneNumberField(
+        db_index=True, blank=True, verbose_name="Téléphone")
+    date_of_birth = models.DateField(
+        db_index=True, verbose_name="Date de naissance")
     date_joined = models.DateTimeField(
-        auto_now_add=True, verbose_name="Date d'adhésion")
-    active = models.BooleanField(default=True, verbose_name="Actif")
+        db_index=True, auto_now_add=True, verbose_name="Date d'adhésion")
+    active = models.BooleanField(
+        db_index=True, default=True, verbose_name="Actif")
     GRADE_CHOICES = [
         ("A", "Adhérent"),
         ("H", "Honneur"),
         ("C", "Collège")
     ]
     grade = models.CharField(
-        max_length=1, choices=GRADE_CHOICES,
+        db_index=True, max_length=1, choices=GRADE_CHOICES,
         default="A", verbose_name="Statut"
     )
     signature = JSignatureField(verbose_name="Signature")
