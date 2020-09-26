@@ -17,10 +17,13 @@ from django.contrib import admin
 from django.conf import settings
 from django.urls import include, path
 
+
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('visitapp.urls')),
 ]
+
+admin.site.enable_nav_sidebar = False
 
 if settings.DEBUG:
     import debug_toolbar

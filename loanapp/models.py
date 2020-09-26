@@ -1,5 +1,6 @@
 from django.db import models
 from memberapp.models import Member
+from inventoryapp.models import Material
 
 
 class BaseLoan(models.Model):
@@ -33,7 +34,9 @@ class LoanMadeToMember(LoanMade):
 
 
 class LoanMadeToMemberMaterial(LoanMadeToMember):
-    material = "bien"
+    material = models.ForeignKey(
+        Material, on_delete=models.PROTECT, verbose_name="Matériel",
+        limit_choices_to={'statut': "A"})
     notice_of_termination = models.IntegerField(
         default=1, verbose_name="Préavis de résiliation en jour")
 

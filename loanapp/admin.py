@@ -3,11 +3,17 @@ from loanapp.models import LoanMadeToMemberMaterial
 
 
 @admin.register(LoanMadeToMemberMaterial)
-class MemberAdmin(admin.ModelAdmin):
+class LoanMadeToMemberMaterialAdmin(admin.ModelAdmin):
     list_display = [
         field.name for field in LoanMadeToMemberMaterial._meta.get_fields()]
-    # list_display = (
-    #     'last_name', 'first_name', 'email', 'phone', 'date_of_birth',
-    #     'date_joined', 'active', 'grade')
-    # list_filter = ('active', 'grade')
-    # search_fields = ('first_name', 'last_name', 'email',)
+
+    def get_form(self, request, obj=None, **kwargs):
+        """
+        Don't allow adding new Product Categories
+        """
+        form = super(LoanMadeToMemberMaterialAdmin, self).get_form(
+            request, obj, **kwargs)
+        form.base_fields['material'].widget.can_add_related = False
+        form.base_fields['material'].widget.can_delete_related = False
+        form.base_fields['material'].widget.can_change_related = False
+        return form
