@@ -24,6 +24,8 @@ urlpatterns = [
 ]
 
 admin.site.enable_nav_sidebar = False
+admin.site.index_template = 'admin/custom_index.html'
+admin.site.app_index_template = 'admin/custom_app_index.html'
 
 if settings.DEBUG:
     import debug_toolbar
