@@ -9,11 +9,12 @@ class LoanMadeToMemberMaterialAdmin(admin.ModelAdmin):
 
     def get_form(self, request, obj=None, **kwargs):
         """
-        Don't allow adding new Product Categories
+        Not allow to add, delete, change material
         """
         form = super(LoanMadeToMemberMaterialAdmin, self).get_form(
             request, obj, **kwargs)
-        form.base_fields['material'].widget.can_add_related = False
-        form.base_fields['material'].widget.can_delete_related = False
-        form.base_fields['material'].widget.can_change_related = False
+        for field_name in ["lender", "borrower", "material"]:
+            form.base_fields['material'].widget.can_add_related = False
+            form.base_fields['material'].widget.can_delete_related = False
+            form.base_fields['material'].widget.can_change_related = False
         return form

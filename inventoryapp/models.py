@@ -1,4 +1,7 @@
 from django.db import models
+from memberapp.models import Member
+from django.dispatch import receiver
+from django.db.models.signals import post_delete
 
 
 class Material(models.Model):
@@ -41,3 +44,31 @@ class Material(models.Model):
         ordering = ['reference']
         verbose_name = "Matériel"
         verbose_name_plural = "Matériels"
+
+
+class Recovery(models.Model):
+    material = models.OneToOneField(
+        Material, on_delete=models.PROTECT, verbose_name="Matériel",
+        limit_choices_to={'acquisition': ""}, db_index=True)
+    recuperator = models.ForeignKey(
+        Member, on_delete=models.PROTECT, verbose_name="Récupérateur",
+        limit_choices_to={'grade': 'C', 'active': True}, db_index=True)
+    date = models.DateField(
+        db_index=True, auto_now_add=True, verbose_name="Date")
+
+    class Meta:
+        ordering = ['date']
+        verbose_name = "Récupération"
+        verbose_name_plural = "Récupérations"
+
+    def save(self, *args, **kwargs):
+        super(Recovery, self).save(*args, **kwargs)
+        recovered_material = self.material
+        recovered_material.acquisition = "R"
+        recovered_material.save()
+
+
+@receiver(post_delete, sender=Recovery)
+def delete_related_material(sender, instance, **kwargs):
+    material = instance.material
+    material.delete()

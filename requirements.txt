@@ -9,3 +9,5 @@ phonenumbers
 django-jsignature
 
 django-filter
+
+django_reverse_admin

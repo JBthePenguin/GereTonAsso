@@ -137,5 +137,11 @@ JSIGNATURE_LINE_WIDTH = -1
 
 # Debug Toolbar
 DEBUG_TOOLBAR_CONFIG = {
-    "SHOW_TOOLBAR_CALLBACK" : lambda request: True,
+    "SHOW_TOOLBAR_CALLBACK": lambda request: True,
+}
+
+# Context
+DEFAULT_CONTEXT = {
+    'title_site': 'Gère Ton Asso',
+    'nav_brand': 'Mon asso',
 }

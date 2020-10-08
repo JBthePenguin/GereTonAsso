@@ -24,13 +24,13 @@ class BaseLoan(models.Model):
 class LoanMade(BaseLoan):
     lender = models.ForeignKey(
         Member, on_delete=models.PROTECT, verbose_name="Prêteur",
-        limit_choices_to={'grade': 'C', 'active': True})
+        limit_choices_to={'grade': 'C', 'active': True}, db_index=True)
 
 
 class LoanMadeToMember(LoanMade):
     borrower = models.ForeignKey(
         Member, on_delete=models.PROTECT, verbose_name="Emprunteur",
-        limit_choices_to={'active': True})
+        limit_choices_to={'active': True}, db_index=True)
 
 
 class LoanMadeToMemberMaterial(LoanMadeToMember):

@@ -1,0 +1,28 @@
+{% extends 'visitapp/base.html' %}
+<!-- Main -->
+{% block main %}
+<h2>Associations amies</h2>
+<hr>
+<table>
+  <thead>
+    <tr>
+      <th>Nom</th>
+		  <th>Email</th>
+      <th>Téléphone</th>
+		  <th>Numéro RNA</th>
+      <th>Numéro SIREN</th>
+	  </tr>
+	</thead>
+	<tbody>
+    {% for asso in object_list %}
+    <tr>
+		  <td>{{ asso.name }}</td>
+      <td>{{ asso.email }}</td>
+      <td>{{ asso.phone.as_national }}</td>
+      <td>{{ asso.number_rna }}</td>
+		  <td>{{ asso.number_siren }}</td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endblock %}
