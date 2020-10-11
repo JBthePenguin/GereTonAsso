@@ -1,9 +1,9 @@
 from django.contrib import admin
-from inventoryapp.models import Material, Recovery
-from inventoryapp.forms import MaterialAdminForm
 from django_reverse_admin import ReverseModelAdmin
 from django.db.models.deletion import ProtectedError
 from django.utils.safestring import SafeString
+from inventoryapp.models import Material, Recovery
+from inventoryapp.forms import MaterialAdminForm
 
 
 @admin.register(Recovery)

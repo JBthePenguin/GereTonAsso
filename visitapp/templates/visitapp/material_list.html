@@ -1,0 +1,41 @@
+{% extends 'visitapp/base.html' %}
+{% load static %}
+<!-- Main -->
+{% block main %}
+<h2>Materiels</h2>
+<!-- Search form -->
+<button onclick="DisplayForm()">Afficher / Masquer la recherche avancée</button>
+<form id="FilterForm" action="" method="get" style="display: {{ display_form }};">
+  <ul>
+  {% for field in filter.form %}
+    {{ field.errors }}
+    <li>{{ field.label_tag }} {{ field }}</li>
+  {% endfor %}
+  </ul>
+  <button id="FilterButton" type='submit'>Rechercher</button>
+  <input type="submit" name="reset" value="Annuler" style="color: white; background-color: red; cursor: pointer;">
+</form>
+<hr>
+<table>
+  <thead>
+    <tr>
+      <th>Désignation / Référence</th>
+		  <th>Valeur</th>
+		  <th>Catégorie</th>
+      <th>Acquisition</th>
+		  <th>État</th>
+	  </tr>
+	</thead>
+	<tbody>
+    {% for material in object_list %}
+    <tr>
+		  <td>{{ material.reference }}</td>
+		  <td>{{ material.value }} €</td>
+      <td>{% if material.category == 'A' %}Association{% elif material.category == 'N' %}Numérique{% elif material.category == 'M' %}Musique{% elif material.category == 'E' %}Énergie{% elif material.category == 'C' %}Consommation{% endif %}</td>
+      <td>{% if material.acquisition == 'R' %}Récupération{% elif material.acquisition == 'P' %}Prêt{% elif material.acquisition == 'A' %}Achat{% elif material.acquisition == 'D' %}Don{% endif %}</td>
+      <td>{% if material.statut == 'A' %}Dispo{% elif material.statut == 'P' %}Prêté{% elif material.statut == 'R' %}Rendu{% elif material.statut == 'D' %}Donné{% elif material.statut == 'V' %}Vendu{% endif %}</td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endblock %}

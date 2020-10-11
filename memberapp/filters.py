@@ -96,4 +96,5 @@ class MemberFilter(django_filters.FilterSet):
 
     class Meta:
         model = Member
-        fields = ['last_name', 'first_name', 'email', 'grade']
+        fields = [
+             'active', 'last_name', 'first_name', 'email', 'phone', 'grade']
