@@ -18,6 +18,13 @@
     </head>
 
     <body>
+        <!-- NAVBAR -->
+        <div class="topnav">
+            <a class="{{ nav_home }}" href="{% url 'home' %}">Accueil</a>
+            <a class="{{ nav_members }}" href="{% url 'members' %}">Membres</a>
+            <a class="{{ nav_asso }}" href="{% url 'associations' %}">Assos amies</a>
+            <a class="{{ nav_materials }}" href="{% url 'materials' %}">Materiels</a>
+        </div>
         <!-- MAIN -->
         <div>
             {% block main %}{% endblock %}

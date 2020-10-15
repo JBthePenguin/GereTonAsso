@@ -3,17 +3,18 @@ from django_reverse_admin import ReverseModelAdmin
 from django.db.models.deletion import ProtectedError
 from django.utils.safestring import SafeString
 from inventoryapp.models import Material, Recovery
-from inventoryapp.forms import MaterialAdminForm
+from inventoryapp.forms import MaterialAdminForm, RecoveryAdminForm
 
 
 @admin.register(Recovery)
 class RecoveryAdmin(ReverseModelAdmin):
     model = Recovery
+    # form = RecoveryAdminForm
     inline_type = 'tabular'
     inline_reverse = [
         ('material', {'fields': ['reference', 'value', 'category']})]
     save_as = True
-    list_display = ['get_material', 'get_recuperator', 'date']
+    list_display = ['get_material', 'get_recuperator', 'date', 'receipt']
     list_display_links = None
     list_filter = ('date', )
     search_fields = (
@@ -30,8 +31,7 @@ class RecoveryAdmin(ReverseModelAdmin):
         """
         Not allow to add, delete, change recuperator.
         """
-        form = super(RecoveryAdmin, self).get_form(
-            request, obj, **kwargs)
+        form = RecoveryAdminForm
         form.base_fields["recuperator"].widget.can_delete_related = False
         form.base_fields["recuperator"].widget.can_change_related = False
         form.base_fields["recuperator"].widget.can_add_related = False
@@ -39,7 +39,7 @@ class RecoveryAdmin(ReverseModelAdmin):
         return form
 
     def get_deleted_objects(self, objs, request):
-        """Override to check if material is not Protected."""
+        """Override to check if material is Protected with loan, donation."""
         for obj in objs:
             try:
                 obj.material.delete()
@@ -69,6 +69,12 @@ class MaterialAdmin(admin.ModelAdmin):
     list_filter = ('category', 'acquisition', 'statut')
     search_fields = ('reference', )
     actions = None
+
+    def get_readonly_fields(self, request, obj=None):
+        if obj:
+            return ['reference']
+        else:
+            return []
 
     def render_change_form(
             self, request, context, add=False, change=False,

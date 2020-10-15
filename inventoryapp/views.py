@@ -25,5 +25,6 @@ class MaterialListView(FilterView):
                 context['filter'] = self.filterset_class()
                 context['object_list'] = Material.objects.all()
         context['page_title'] = 'Matériels'
+        context['nav_materials'] = 'active'
         context.update(settings.DEFAULT_CONTEXT)
         return context

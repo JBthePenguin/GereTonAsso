@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'loanapp',
     'jsignature',
     'django_filters',
+    'django_cleanup.apps.CleanupConfig',
 ]
 
 MIDDLEWARE = [

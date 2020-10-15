@@ -26,6 +26,7 @@ class MemberListView(FilterView):
                 context['filter'] = self.filterset_class()
                 context['object_list'] = Member.objects.all()
         context['page_title'] = 'Membres'
+        context['nav_members'] = 'active'
         context.update(settings.DEFAULT_CONTEXT)
         return context
 
@@ -41,5 +42,6 @@ class AssoListView(ListView):
         """Override original one to update the context."""
         context = super().get_context_data(**kwargs)
         context['page_title'] = 'Assos amies'
+        context['nav_asso'] = 'active'
         context.update(settings.DEFAULT_CONTEXT)
         return context

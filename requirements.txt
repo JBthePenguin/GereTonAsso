@@ -11,3 +11,7 @@ django-jsignature
 django-filter
 
 django_reverse_admin
+
+django-cleanup
+
+xhtml2pdf

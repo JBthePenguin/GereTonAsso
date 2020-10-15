@@ -1,0 +1,17 @@
+{% load static %}
+
+<!DOCTYPE html>
+
+<html lang="fr">
+  <head>
+      <!-- Title -->
+      <title>Recovery receipt</title>
+  </head>
+
+  <body>
+    <h1>Récupération</h1>
+    <p> Je soussigné {{ recovery.recuperator.first_name }} {{ recovery.recuperator.last_name }} ...</p>
+    <p> Fait à Tilhouse, le {{ recovery.date }}</p>
+  </body>
+
+</html>
