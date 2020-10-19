@@ -1,9 +1,13 @@
 {% extends 'visitapp/base.html' %}
 {% load static %}
+{% load inventory_tags %}
+
 <!-- Main -->
 {% block main %}
-<h2>Materiels</h2>
+<h2>Matériels</h2>
+<p>Voir <a href="{% url 'recoveries' %}" style="color: black;">les récupérations</a>
 <!-- Search form -->
+<hr>
 <button onclick="DisplayForm()">Afficher / Masquer la recherche avancée</button>
 <form id="FilterForm" action="" method="get" style="display: {{ display_form }};">
   <ul>

@@ -40,7 +40,7 @@
       <li><strong>Valeur estimée à ce jour:</strong> {{ recovery.material.value }} €.</li>
     </ul>
     <p> Fait à Tilhouse, le {{ recovery.date }}</p>
-    <p id='signature'><img src="{{ recovery.recuperator.signature.path }}" alt="signature" /></p>
+    <p id='signature'>{% if recovery.recuperator.signature %}<img src="{{ recovery.recuperator.signature.path }}" alt="signature" />{% endif %}</p>
   </body>
 
 </html>

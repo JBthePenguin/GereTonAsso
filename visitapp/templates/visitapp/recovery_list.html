@@ -1,0 +1,41 @@
+{% extends 'visitapp/base.html' %}
+{% load static %}
+{% load inventory_tags %}
+
+<!-- Main -->
+{% block main %}
+<h2>Récupérations de matériel</h2>
+<!-- Search form -->
+<button onclick="DisplayForm()">Afficher / Masquer la recherche avancée</button>
+<form id="FilterForm" action="" method="get" style="display: {{ display_form }};">
+  <ul>
+  {% for field in filter.form %}
+    {{ field.errors }}
+    <li>{{ field.label_tag }} {{ field }}</li>
+  {% endfor %}
+  </ul>
+  <button id="FilterButton" type='submit'>Rechercher</button>
+  <input type="submit" name="reset" value="Annuler" style="color: white; background-color: red; cursor: pointer;">
+</form>
+<hr>
+<table>
+  <thead>
+    <tr>
+      <th>Matériel</th>
+		  <th>Récupérateur</th>
+		  <th>Date</th>
+      <th>Attestation</th>
+	  </tr>
+	</thead>
+	<tbody>
+    {% for recovery in object_list %}
+    <tr>
+		  <td>{{ recovery.material.reference }}</td>
+		  <td>{{ recovery.recuperator.last_name }} {{ recovery.recuperator.first_name }}</td>
+      <td>{{ recovery.date }}</td>
+      <td><a href="{{ recovery.receipt.url }}" target="_blank" style="color: black;">{{ recovery.receipt|filename }}</a></td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endblock %}
