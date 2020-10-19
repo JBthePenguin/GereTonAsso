@@ -5,13 +5,42 @@
 <html lang="fr">
   <head>
       <!-- Title -->
-      <title>Recovery receipt</title>
+      <title>Attestation de récupération</title>
+      <style type="text/css">
+          body {
+            font-weight: 200;
+            font-size: 14px;
+          }
+          h1 {
+            font-size: 20px;
+            font-weight: bold;
+            text-align: center;
+            padding-top: 150px;
+          }
+          .with-indent {
+            text-indent: 15px;
+          }
+          ul {
+            margin-bottom: 15px;
+          }
+          ul li {
+            list-style-type: none;
+          }
+          #signature {
+            text-indent: 45px;
+          }
+      </style>
   </head>
 
   <body>
-    <h1>Récupération</h1>
-    <p> Je soussigné {{ recovery.recuperator.first_name }} {{ recovery.recuperator.last_name }} ...</p>
+    <h1>Attestation de récupération</h1>
+    <p class="with-indent">Je, soussigné {{ recovery.recuperator.first_name }} {{ recovery.recuperator.last_name }}, atteste sur l'honneur avoir récupéré pour l'association 'MaSuperAssos', dont je suis membre, le matériel avec les caractéristiques suivantes:</p>
+    <ul>
+      <li><strong>Désignation:</strong> {{ recovery.material.reference }}.</li>
+      <li><strong>Valeur estimée à ce jour:</strong> {{ recovery.material.value }} €.</li>
+    </ul>
     <p> Fait à Tilhouse, le {{ recovery.date }}</p>
+    <p id='signature'><img src="{{ recovery.recuperator.signature.path }}" alt="signature" /></p>
   </body>
 
 </html>

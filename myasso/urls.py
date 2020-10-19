@@ -15,6 +15,8 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.conf import settings
+from django.contrib.staticfiles.urls import static
+from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 from django.urls import include, path
 
 
@@ -22,6 +24,9 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('visitapp.urls')),
 ]
+
+urlpatterns += staticfiles_urlpatterns()
+urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 admin.site.enable_nav_sidebar = False
 admin.site.index_template = 'admin/custom_index.html'

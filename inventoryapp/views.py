@@ -1,6 +1,6 @@
 from django.conf import settings
 from django_filters.views import FilterView
-from inventoryapp.models import Material
+from inventoryapp.models import Material, Recovery
 from inventoryapp.filters import MaterialFilter
 
 
@@ -26,5 +26,11 @@ class MaterialListView(FilterView):
                 context['object_list'] = Material.objects.all()
         context['page_title'] = 'Matériels'
         context['nav_materials'] = 'active'
+        # recoveries receipts links
+        recoveries_links = {}
+        recoveries = Recovery.objects.all()
+        for recovery in recoveries:
+            recoveries_links[recovery.material] = recovery.receipt.url
+        context['recoveries'] = recoveries_links
         context.update(settings.DEFAULT_CONTEXT)
         return context

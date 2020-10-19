@@ -1,6 +1,11 @@
 from django.db import models
+from django.core.exceptions import ValidationError
 from phonenumber_field.modelfields import PhoneNumberField
-from jsignature.fields import JSignatureField
+
+
+def validate_image(image):
+    if (image.width > 125) or (image.height != 100):
+        raise ValidationError("La taille de l'image doit être 125px x 100px")
 
 
 class Member(models.Model):
@@ -27,7 +32,10 @@ class Member(models.Model):
         db_index=True, max_length=1, choices=GRADE_CHOICES,
         default="A", verbose_name="Statut"
     )
-    signature = JSignatureField(verbose_name="Signature")
+    signature = models.ImageField(
+        verbose_name="Signature (taille: 125px x 100px)",
+        upload_to='signatures/members/', null=True, blank=True,
+        validators=[validate_image])
 
     class Meta:
         ordering = ['last_name', 'first_name']
@@ -52,7 +60,10 @@ class Association(models.Model):
     number_siren = models.CharField(
         db_index=True, unique=True, blank=True, null=True,
         max_length=20, verbose_name="Numéro SIREN")
-    signature = JSignatureField(verbose_name="Signature")
+    signature = models.ImageField(
+        verbose_name="Signature (taille: 125px x 100px)",
+        upload_to='signatures/assos/', null=True, blank=True,
+        validators=[validate_image])
 
     class Meta:
         ordering = ['name']

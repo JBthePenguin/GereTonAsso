@@ -8,6 +8,10 @@ myasso/settings/__pycache__/
 
 *app/__pycache__/
 
-*app/migrations/__pycache__/
+*app/*/__pycache__/
 
 *app/migrations/0*.py
+
+media/signatures/*/*.png
+
+media/receipts_pdf/*/*.pdf
