@@ -16,6 +16,9 @@
   <input type="submit" name="reset" value="Annuler" style="color: white; background-color: red; cursor: pointer;">
 </form>
 <hr>
+{% with n_members=object_list|length %}
+<p>{{ n_members }} membre{% if n_members > 1 %}s{% endif %}</p>
+{% endwith %}
 <table>
   <thead>
     <tr>

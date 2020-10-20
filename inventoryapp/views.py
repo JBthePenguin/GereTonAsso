@@ -1,5 +1,7 @@
 from django.conf import settings
+from django.db.models import Sum
 from django_filters.views import FilterView
+from decimal import Decimal
 from inventoryapp.models import Material, Recovery
 from inventoryapp.filters import MaterialFilter, RecoveryFilter
 
@@ -32,6 +34,10 @@ class MaterialListView(FilterView):
         for recovery in recoveries:
             recoveries_links[recovery.material] = recovery.receipt.url
         context['recoveries'] = recoveries_links
+        # total value
+        TWOPLACES = Decimal(10) ** -2
+        context['total_value'] = Decimal(context['object_list'].aggregate(
+            Sum('value')).get('value__sum')).quantize(TWOPLACES)
         context.update(settings.DEFAULT_CONTEXT)
         return context
 

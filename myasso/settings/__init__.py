@@ -41,8 +41,8 @@ INSTALLED_APPS = [
     'visitapp',
     'memberapp',
     'inventoryapp',
+    'treasuryapp',
     'loanapp',
-    'jsignature',
     'django_filters',
     'django_cleanup.apps.CleanupConfig',
 ]

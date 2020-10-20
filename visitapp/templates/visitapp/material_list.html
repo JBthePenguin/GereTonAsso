@@ -24,22 +24,25 @@
   <thead>
     <tr>
       <th>Désignation / Référence</th>
-		  <th>Valeur</th>
 		  <th>Catégorie</th>
       <th>Acquisition</th>
 		  <th>État</th>
+      <th>Valeur</th>
 	  </tr>
 	</thead>
 	<tbody>
     {% for material in object_list %}
     <tr>
 		  <td>{{ material.reference }}</td>
-		  <td>{{ material.value }} €</td>
       <td>{% if material.category == 'A' %}Association{% elif material.category == 'N' %}Numérique{% elif material.category == 'M' %}Musique{% elif material.category == 'E' %}Énergie{% elif material.category == 'C' %}Consommation{% endif %}</td>
       <td>{% if material.acquisition == 'R' %}<a href="{{ recoveries|get_item:material }}" target="_blank" style="color: black;">Récupération</a>{% elif material.acquisition == 'P' %}Prêt{% elif material.acquisition == 'A' %}Achat{% elif material.acquisition == 'D' %}Don{% endif %}</td>
       <td>{% if material.statut == 'A' %}Dispo{% elif material.statut == 'P' %}Prêté{% elif material.statut == 'R' %}Rendu{% elif material.statut == 'D' %}Donné{% elif material.statut == 'V' %}Vendu{% endif %}</td>
+      <td>{{ material.value }} €</td>
     </tr>
     {% endfor %}
+    <tr style="background-color: #333; color: white;">
+      <td colspan=4 style="text-align: right;">Valeur totale:</td>
+      <td>{{ total_value }} €</td>
   </tbody>
 </table>
 {% endblock %}
