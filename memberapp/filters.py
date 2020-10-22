@@ -1,6 +1,6 @@
 from django import forms
 from django.utils.translation import gettext as _
-from memberapp.models import Member
+from memberapp.models import Member, Association
 import django_filters
 
 
@@ -98,3 +98,28 @@ class MemberFilter(django_filters.FilterSet):
         model = Member
         fields = [
              'active', 'last_name', 'first_name', 'email', 'phone', 'grade']
+
+
+class AssosFilter(django_filters.FilterSet):
+    """Subclass of django_filters.FilterSet """
+    name = django_filters.CharFilter(
+        lookup_expr='icontains', label='Nom contenant')
+    email = django_filters.CharFilter(
+        lookup_expr='icontains', label='Email contenant')
+    phone = django_filters.CharFilter(
+        label='Téléphone contenant', method='filter_phone')
+    number_rna = django_filters.CharFilter(
+        lookup_expr='icontains', label='Numéro RNA contenant')
+    number_siren = django_filters.CharFilter(
+        lookup_expr='icontains', label='Numéro SIREN contenant')
+
+    def filter_phone(self, queryset, name, value):
+        s = []  # disregarding spaces
+        for i in range(0, len(value)):
+            s.append(value[i:i+1])
+        return queryset.filter(phone__iregex='\\s*'.join(s))
+
+    class Meta:
+        model = Association
+        fields = [
+             'name', 'email', 'phone', 'number_rna', 'number_siren']

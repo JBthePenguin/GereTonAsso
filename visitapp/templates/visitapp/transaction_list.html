@@ -1,0 +1,69 @@
+{% extends 'visitapp/base.html' %}
+{% load static %}
+<!-- Main -->
+{% block main %}
+<h2>Opérations</h2>
+<p>Voir <a href="{% url 'deposits' %}" style="color: black;">les dépôts à la banque</a>, <a href="{% url 'withdrawals' %}" style="color: black;">les retraits à la banque</a></p>
+<!-- Search form -->
+<hr>
+<button onclick="DisplayForm()">Afficher / Masquer la recherche avancée</button>
+<form id="FilterForm" action="" method="get" style="display: {{ display_form }};">
+  <ul>
+  {% for field in filter.form %}
+    {{ field.errors }}
+    <li>{{ field.label_tag }} {{ field }}</li>
+  {% endfor %}
+  </ul>
+  <button id="FilterButton" type='submit'>Rechercher</button>
+  <input type="submit" name="reset" value="Annuler" style="color: white; background-color: red; cursor: pointer;">
+</form>
+<hr>
+{% with n_transactions=object_list|length %}
+<p>{{ n_transactions }} opération{% if n_transactions > 1 %}s{% endif %}</p>
+{% endwith %}
+{% if object_list %}
+<table>
+  <thead>
+    <tr>
+      <th rowspan="2">Libellé</th>
+      <th rowspan="2">Date</th>
+		  <th colspan="2" style="text-align: center;">Banque</th>
+		  <th colspan="2" style="text-align: center;">Caisse</th>
+	  </tr>
+    <tr>
+      <th style="text-align: center;">Entrée</th>
+      <th style="text-align: center;">Sortie</th>
+      <th style="text-align: center;">Entrée</th>
+      <th style="text-align: center;">Sortie</th>
+    </tr>
+	</thead>
+	<tbody>
+    {% for transaction in object_list %}
+    <tr>
+		  <td>{{ transaction.wording }}</td>
+      <td>{{ transaction.date }}</td>
+		  <td style="text-align: center;">{% if transaction.bank_entry %}{{ transaction.bank_entry }} €{% endif %}</td>
+      <td style="text-align: center;">{% if transaction.bank_exit %}{{ transaction.bank_exit }} €{% endif %}</td>
+      <td style="text-align: center;">{% if transaction.fund_entry %}{{ transaction.fund_entry }} €{% endif %}</td>
+      <td style="text-align: center;">{% if transaction.fund_exit %}{{ transaction.fund_exit }} €{% endif %}</td>
+    </tr>
+    {% endfor %}
+    <tr style="background-color: #333; color: white;">
+      <td colspan='2' style="text-align: right;">Totaux:</td>
+      <td style="text-align: center;">{{ total_bank_entry }} €</td>
+      <td style="text-align: center;">{{ total_bank_exit }} €</td>
+      <td style="text-align: center;">{{ total_fund_entry }} €</td>
+      <td style="text-align: center;">{{ total_fund_exit }} €</td>
+    </tr>
+    <tr style="background-color: #333; color: white;">
+      <td colspan='2' rowspan="2"></td>
+      <td colspan='2' style="text-align: center;">Banque: {{ total_bank }} €</td>
+      <td colspan='2' style="text-align: center;">Caisse: {{ total_fund }} €</td>
+    </tr>
+    <tr style="background-color: #333; color: white;">
+      <td colspan='4' style="text-align: center;">Total: {{ total }} €</td>
+    </tr>
+  </tbody>
+</table>
+{% endif %}
+{% endblock %}

@@ -38,7 +38,9 @@ class MaterialFilter(django_filters.FilterSet):
         ("P", "Prêté"),
         ("R", "Rendu"),
         ("D", "Donné"),
-        ("V", "Vendu")
+        ("V", "Vendu"),
+        ("H", "HS"),
+        ("J", "Jeté")
     ]
     statut = django_filters.ChoiceFilter(choices=STATUT_CHOICES, label='État')
 

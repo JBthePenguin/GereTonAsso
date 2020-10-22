@@ -5,7 +5,7 @@
 <!-- Main -->
 {% block main %}
 <h2>Matériels</h2>
-<p>Voir <a href="{% url 'recoveries' %}" style="color: black;">les récupérations</a>
+<p>Voir <a href="{% url 'recoveries' %}" style="color: black;">les récupérations</a></p>
 <!-- Search form -->
 <hr>
 <button onclick="DisplayForm()">Afficher / Masquer la recherche avancée</button>
@@ -20,6 +20,7 @@
   <input type="submit" name="reset" value="Annuler" style="color: white; background-color: red; cursor: pointer;">
 </form>
 <hr>
+{% if object_list %}
 <table>
   <thead>
     <tr>
@@ -45,4 +46,5 @@
       <td>{{ total_value }} €</td>
   </tbody>
 </table>
+{% endif %}
 {% endblock %}

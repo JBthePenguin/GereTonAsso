@@ -19,6 +19,7 @@
 {% with n_members=object_list|length %}
 <p>{{ n_members }} membre{% if n_members > 1 %}s{% endif %}</p>
 {% endwith %}
+{% if object_list %}
 <table>
   <thead>
     <tr>
@@ -47,4 +48,5 @@
     {% endfor %}
   </tbody>
 </table>
+{% endif %}
 {% endblock %}

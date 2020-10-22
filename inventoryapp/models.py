@@ -37,7 +37,9 @@ class Material(models.Model):
         ("P", "Prêté"),
         ("R", "Rendu"),
         ("D", "Donné"),
-        ("V", "Vendu")
+        ("V", "Vendu"),
+        ("H", "HS"),
+        ("J", "Jeté")
     ]
     statut = models.CharField(
         db_index=True, max_length=1, choices=STATUT_CHOICES, default="A",
@@ -63,7 +65,7 @@ class Recovery(models.Model):
         verbose_name="Fiche")
 
     class Meta:
-        ordering = ['date']
+        ordering = ['material__reference']
         verbose_name = "Récupération"
         verbose_name_plural = "Récupérations"
 

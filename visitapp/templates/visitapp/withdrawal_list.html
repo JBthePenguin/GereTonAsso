@@ -1,7 +1,8 @@
 {% extends 'visitapp/base.html' %}
+{% load static %}
 <!-- Main -->
 {% block main %}
-<h2>Associations amies</h2>
+<h2>Retraits à la banque</h2>
 <!-- Search form -->
 <button onclick="DisplayForm()">Afficher / Masquer la recherche avancée</button>
 <form id="FilterForm" action="" method="get" style="display: {{ display_form }};">
@@ -15,30 +16,30 @@
   <input type="submit" name="reset" value="Annuler" style="color: white; background-color: red; cursor: pointer;">
 </form>
 <hr>
-{% with n_assos=object_list|length %}
-<p>{{ n_assos }} association{% if n_assos > 1 %}s{% endif %} amie{% if n_assos > 1 %}s{% endif %}</p>
+{% with n_withdrawals=object_list|length %}
+<p>{{ n_withdrawals }} retrait{% if n_withdrawals > 1 %}s{% endif %} à la banque</p>
 {% endwith %}
 {% if object_list %}
 <table>
   <thead>
     <tr>
-      <th>Nom</th>
-		  <th>Email</th>
-      <th>Téléphone</th>
-		  <th>Numéro RNA</th>
-      <th>Numéro SIREN</th>
+      <th>Date</th>
+      <th>Retireur</th>
+		  <th>Montant</th>
 	  </tr>
 	</thead>
 	<tbody>
-    {% for asso in object_list %}
+    {% for deposit in object_list %}
     <tr>
-		  <td>{{ asso.name }}</td>
-      <td>{{ asso.email }}</td>
-      <td>{{ asso.phone.as_national }}</td>
-      <td>{{ asso.number_rna }}</td>
-		  <td>{{ asso.number_siren }}</td>
+		  <td>{{ deposit.date }}</td>
+      <td>{{ deposit.withdrawer }}</td>
+		  <td>{{ deposit.amount }} €</td>
     </tr>
     {% endfor %}
+    <tr style="background-color: #333; color: white;">
+      <td colspan='2' style="text-align: right;">Total:</td>
+      <td>{{ total_amount }} €</td>
+    </tr>
   </tbody>
 </table>
 {% endif %}

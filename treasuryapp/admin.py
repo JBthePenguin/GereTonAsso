@@ -11,9 +11,9 @@ class TransactionAdmin(admin.ModelAdmin):
 
 @admin.register(MoneyDeposit)
 class MoneyDepositAdmin(admin.ModelAdmin):
-    list_display = ['amount', 'date']
+    list_display = ['amount', 'depositor', 'date']
 
 
 @admin.register(MoneyWithdrawal)
 class MoneyWithdrawalAdmin(admin.ModelAdmin):
-    list_display = ['amount', 'date']
+    list_display = ['amount', 'withdrawer', 'date']

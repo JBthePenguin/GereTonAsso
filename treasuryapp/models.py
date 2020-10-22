@@ -1,4 +1,5 @@
 from django.db import models
+from memberapp.models import Member
 
 
 class Transaction(models.Model):
@@ -19,7 +20,7 @@ class Transaction(models.Model):
         null=True, blank=True)
 
     class Meta:
-        ordering = ['date']
+        ordering = ['-date']
         verbose_name = "Opération"
         verbose_name_plural = "Opérations"
 
@@ -27,11 +28,14 @@ class Transaction(models.Model):
 class MoneyDeposit(models.Model):
     amount = models.DecimalField(
         max_digits=8, decimal_places=2, verbose_name="Montant en €")
+    depositor = models.ForeignKey(
+        Member, on_delete=models.PROTECT, verbose_name="Déposant",
+        limit_choices_to={'grade': 'C', 'active': True}, db_index=True)
     date = models.DateField(
         db_index=True, auto_now_add=True, verbose_name="Date")
 
     class Meta:
-        ordering = ['date']
+        ordering = ['-date']
         verbose_name = "Dépôt à la banque"
         verbose_name_plural = "Dépôts à la banque"
 
@@ -46,17 +50,20 @@ class MoneyDeposit(models.Model):
 class MoneyWithdrawal(models.Model):
     amount = models.DecimalField(
         max_digits=8, decimal_places=2, verbose_name="Montant en €")
+    withdrawer = models.ForeignKey(
+        Member, on_delete=models.PROTECT, verbose_name="Retireur",
+        limit_choices_to={'grade': 'C', 'active': True}, db_index=True)
     date = models.DateField(
         db_index=True, auto_now_add=True, verbose_name="Date")
 
     class Meta:
-        ordering = ['date']
-        verbose_name = "Retrait d'argent liquide"
-        verbose_name_plural = "Retraits d'argent liquide"
+        ordering = ['-date']
+        verbose_name = "Retrait à la banque"
+        verbose_name_plural = "Retraits à la banque"
 
     def save(self, *args, **kwargs):
         super(MoneyWithdrawal, self).save(*args, **kwargs)
         Transaction.objects.create(
-            wording="Retrait d'argent liquide", date=self.date,
+            wording="Retrait à la banque", date=self.date,
             bank_exit=self.amount, fund_entry=(self.amount)
         )
